@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "MERN",
   "main": "server.js",
+  "proxy": "http://127.0.0.1:5000",
   "type": "module",
   "scripts": {
     "start": "node server/server",
