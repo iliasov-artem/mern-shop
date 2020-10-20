@@ -13,6 +13,7 @@ export const productReducer = (state = { products: []}, action) => {
     case PRODUCT_LIST_REQUEST: {
       return {
         loading: true,
+        products: [],
       }
     }
 
