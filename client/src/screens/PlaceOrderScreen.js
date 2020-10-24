@@ -1,19 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Message } from '../components/Message'
-
+import { createOrder } from '../actions/orderActions'
 import { Checkout } from '../components/Checkout'
 
-export const PlaceOrderScreen = props => {
+export const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   const {
-    shippingAddress: { address, city, country, postalCode },
+    shippingAddress,
     paymentMethod,
     cartItems,
   } = useSelector(state => state.cart);
+
+  const { address, city, country, postalCode } = shippingAddress;
 
   const addDecimals = number => (Math.round(number * 100) / 100).toFixed(2);
 
@@ -26,9 +28,25 @@ export const PlaceOrderScreen = props => {
   const taxPrice = addDecimals(Number(0.13 * itemsPrice));
   const totalPrice = addDecimals(Number(itemsPrice) + Number(shippingPrice) + Number(taxPrice));
 
+  const { order, success, error } = useSelector(state => state.orderCreate);
+
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`)
+    }
+    // eslint-disable-next-line 
+  }, [history, success]);
   
   const placeOrderHandler = () => {
-    console.log('order')
+    dispatch(createOrder({
+      orderItems: cartItems,
+      shippingAddress,
+      paymentMethod,
+      itemsPrice,
+      shippingPrice,
+      taxPrice,
+      totalPrice
+    }));
   }
 
   return (
@@ -66,7 +84,7 @@ export const PlaceOrderScreen = props => {
                             </Link>
                           </Col>
                           <Col md={4}>
-                            {`${quantity} x ${price} = ${quantity * price}`}
+                            {`${quantity} x ${price} = ${addDecimals(quantity * price)}`}
                           </Col>
                         </Row>
                       </ListGroup.Item>
@@ -105,6 +123,9 @@ export const PlaceOrderScreen = props => {
                   <Col>Total</Col>
                   <Col>${totalPrice}</Col>
                 </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {error && <Message variant='danger'>{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button
