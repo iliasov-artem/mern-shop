@@ -47,7 +47,7 @@ export const ProfileScreen = ({ location, history }) => {
     }
     dispatch(updateUserProfile({ id: user._id, name, email, password }));
   }
-  // TODO confusing ui when error after success
+
   return (
     <Row>
       <Col md={3}>
