@@ -62,7 +62,7 @@ export const OrderScreen = ({ match }) => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, orderId, successPay, order]);
+  }, [dispatch, orderId, successPay, order, isPaid]);
 
   const successPaymentHandler = (paymentResult) => {
     console.log('paymentResult', paymentResult)
