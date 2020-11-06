@@ -1,5 +1,4 @@
 import axios from 'axios'
-
 import {
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
