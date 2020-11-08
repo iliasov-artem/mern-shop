@@ -35,7 +35,7 @@ export const UserEditScreen = ({ match, history }) => {
     setName(user.name);
     setEmail(user.email);
     setIsAdmin(user.isAdmin);
-  }, [dispatch, user, userId]);
+  }, [dispatch, user, userId, history, successUpdate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
