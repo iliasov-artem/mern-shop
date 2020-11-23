@@ -33,9 +33,12 @@ export const productReducer = (state = { products: []}, action) => {
     }
 
     case PRODUCT_LIST_SUCCESS: {
+      const { products, pages, page } = payload;
       return {
         loading: false,
-        products: payload,
+        products,
+        page,
+        pages
       }
     }
 
