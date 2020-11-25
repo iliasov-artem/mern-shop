@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import { Rating } from '../components/Rating'
-
+import { Meta } from '../components/Meta'
 import {
   listProductDetails,
   resetReviewCreateProduct,
@@ -74,7 +74,8 @@ export const ProductScreen = ({ history, match: { params: { id }}}) => {
 
   return (
     <>
-      <Link className='btn btn-dark my-3' to='/'>Go Back</Link>
+      <Link className='btn btn-primary my-3' to='/'>Go Back</Link>
+      <Meta title={name} />
       <Row>
         <Col md={6}>
           <Image src={image} alt={name} fluid />
