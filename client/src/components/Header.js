@@ -17,7 +17,7 @@ export const Header = () => {
 
   return (
     <header>
-      <Navbar bg='light' expand='lg' collapseOnSelect>
+      <Navbar bg='primary' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>DemoShop</Navbar.Brand>
